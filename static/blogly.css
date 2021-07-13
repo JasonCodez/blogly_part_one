@@ -1,0 +1,17 @@
+body {
+   height: 100vh;
+}
+
+#userForm {
+   display: flex;
+   flex-direction: column;
+   width: 20%;
+}
+
+#userForm button {
+   width: 100px;
+   margin-top: 10px;
+   background-color: blue;
+   color: white;
+}
+
