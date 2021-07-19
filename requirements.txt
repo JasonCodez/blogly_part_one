@@ -19,7 +19,7 @@ pickleshare==0.7.5
 prompt-toolkit==3.0.19
 psycopg2-binary==2.9.1
 Pygments==2.9.0
-SQLAlchemy==1.4.20
+SQLAlchemy==1.4.21
 traitlets==5.0.5
 wcwidth==0.2.5
 Werkzeug==2.0.1

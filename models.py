@@ -2,6 +2,7 @@
 
 import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
 
 db = SQLAlchemy()
 
@@ -23,12 +24,15 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.Text, nullable=False)
     last_name = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.Text, nullable=False, default=DEFAULT_IMAGE_URL)
 
     posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
+
+    def __repr__(self):
+       return f"<Name: {self.full_name}>"
 
     @property
     def full_name(self):
@@ -50,6 +54,39 @@ class Post(db.Model):
         nullable=False,
         default=datetime.datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    def __repr__(self):
+       return f"<Title: {self.title} | Content: {self.content} | Created At: {self.created_at} | User ID: {self.user_id}>"
+
+
+
+class PostTag(db.Model):
+
+   __tablename__ = "posts_tags"
+
+   post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+   tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+
+   def __repr__(self):
+      return f"<Post ID: {self.post_id} | Tag ID: {self.tag_id} >"
+
+
+
+class Tag(db.Model):
+
+   __tablename__ = "tags"
+
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.Text, nullable=False, unique=True)
+
+   posts = db.relationship('Post', secondary='posts_tags', backref='tags')
+
+   def __repr__(self):
+      return f"<Tag ID: {self.id} | Name: {self.name} >"
+
+
+
+
 
 
 

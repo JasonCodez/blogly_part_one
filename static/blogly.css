@@ -2,16 +2,16 @@ body {
    height: 100vh;
 }
 
-#userForm {
-   display: flex;
-   flex-direction: column;
-   width: 20%;
+.btn {
+   margin-top: 10px;
 }
 
-#userForm button {
-   width: 100px;
-   margin-top: 10px;
-   background-color: blue;
-   color: white;
+form {
+   margin-top: 20px;
 }
+
+/* input[type=checkbox] {
+   margin-left: 10px;
+} */
+
 
